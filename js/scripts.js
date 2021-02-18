@@ -32,13 +32,13 @@ async function loadSection(page) {
     const text = await result.text();
     const parser = new DOMParser();
     const loadedSection = parser.parseFromString(text, 'text/html');
-    return loadedSection.querySelector('html');
+    return loadedSection.querySelector('div');
 }
 
 async function render(page) {
     const section = await loadSection(page.section);
-    // const path = page.path === 'index' ? 'vanilla-js-spa/' : `vanilla-js-spa/${page.path}`;
-    // history.replaceState({}, '', path);
+    const path = page.path === 'index' ? '/vanilla-js-spa' : `/vanilla-js-spa/${page.path}`;
+    history.replaceState({}, '', path);
     document.title = page.title;
     if (app.firstChild) {
         app.replaceChild(section, app.firstChild);
