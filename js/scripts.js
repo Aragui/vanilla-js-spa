@@ -5,15 +5,18 @@ const sections = document.querySelectorAll('.nav-link'); // Navbar buttons refer
 const routes = [
     {
         section: 'inicio.html',
-        path: 'index'
+        path: 'index',
+        title: 'Inicio'
     },
     {
         section: 'productos.html',
-        path: 'productos'
+        path: 'productos',
+        title: 'Productos'
     },
     {
         section: 'mision.html',
-        path: 'mision'
+        path: 'mision',
+        title: 'Misión'
     },
 ]
 
@@ -25,7 +28,7 @@ const addActive = id => document.querySelector(`#${id}`).classList.add('active')
 const getRoute = route => routes.find(x => x.path == route);
 
 async function loadSection(page) {
-    const result = await fetch(`/sections/${page}`);
+    const result = await fetch(`/vanilla-js-spa/sections/${page}`);
     const text = await result.text();
     const parser = new DOMParser();
     const loadedSection = parser.parseFromString(text, 'text/html');
@@ -34,8 +37,9 @@ async function loadSection(page) {
 
 async function render(page) {
     const section = await loadSection(page.section);
-    const path = page.path === 'index' ? '/' : page.path;
-    history.replaceState({}, '', path);
+    // const path = page.path === 'index' ? 'vanilla-js-spa/' : `vanilla-js-spa/${page.path}`;
+    // history.replaceState({}, '', path);
+    document.title = page.title;
     if (app.firstChild) {
         app.replaceChild(section, app.firstChild);
     } else {
