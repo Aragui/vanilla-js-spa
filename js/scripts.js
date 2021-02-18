@@ -62,12 +62,12 @@ sections.forEach(section => {
     })
 })
 
-/* setInterval(() => {
+setInterval(() => {
     const route = routes[counter];
     const path = routes[counter].path
     removeActive();
     addActive(path);
     render(route);
     counter < 2 ? counter++ : counter = 0;
-}, 3000) */
+}, 3000);
 
